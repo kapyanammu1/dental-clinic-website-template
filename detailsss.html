@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>DentCare - Dental Clinic Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+	<link href="css/datatables.bundle.css" rel="stylesheet" />
+	<link href="css/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.bundle.css" rel="stylesheet" type="text/css" />
+    
+</head>
+
+<body id="kt_app_body" data-kt-app-header-fixed="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary m-1" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-dark m-1" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-secondary m-1" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
+        <div class="row gx-0">
+            <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                <div id="openingHrs" class="d-inline-flex align-items-center">
+                    
+                </div>
+            </div>
+            <div class="col-md-6 text-center text-lg-end">
+                <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    <div id="clinic_email" class="me-3 pe-3 border-end py-2">
+                        
+                    </div>
+                    <div id="clinic_contact" class="py-2">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="index.html" class="navbar-brand p-0">
+            <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentsCare</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="service.html" class="nav-item nav-link">Service</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-bs-toggle="dropdown">Pages</a>
+                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-5">
+                            <a href="account/overview.html" class="menu-link px-5">My Profile</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-5 my-1">
+                            <a href="account/settings.html" class="menu-link px-5">Account Settings</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-5">
+                            <a href="authentication/layouts/corporate/sign-in.html" class="menu-link px-5">Sign Out</a>
+                        </div>
+                        <!--end::Menu item-->
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="sign-in.html" id="btn-sign_in" class="nav-item nav-link" style="display: none;">Sign-In/Sign-up</a>
+            </div>
+            <!--begin::Navbar-->
+            <div class="app-navbar flex-shrink-1" id="user-dropdown" style="display: none;">
+                <!--begin::User menu-->
+                <div class="app-navbar-item ms-2 ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
+                    <!--begin::Menu wrapper-->
+                    <div id="profile_picture" class="cursor-pointer symbol symbol-35px symbol-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                        
+                    </div>
+                    <!--begin::User account menu-->
+                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <div class="menu-content d-flex align-items-center px-3">
+                                <!--begin::Avatar-->
+                                <div id="profile_picture1" class="symbol symbol-50px me-5">
+                                    
+                                </div>
+                                <!--end::Avatar-->
+                                <!--begin::Username-->
+                                <div class="d-flex flex-column">
+                                    <div id="patient_name" class="fw-bold d-flex align-items-center fs-5"></div>
+                                    <a id="patient_email" href="#" class="fw-semibold text-muted text-hover-primary fs-7"></a>
+                                </div>
+                                <!--end::Username-->
+                            </div>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu separator-->
+                        <div class="separator my-2"></div>
+                        <!--end::Menu separator-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-5">
+                            <a href="details.html" class="menu-link px-5">My Profile</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-5 my-1">
+                            <a href="account/settings.html" class="menu-link px-5">Account Settings</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-5">
+                            <a id="btn_signout" class="menu-link px-5">Sign Out</a>
+                        </div>
+                        <!--end::Menu item-->
+                    </div>
+                    <!--end::User account menu-->
+                    <!--end::Menu wrapper-->
+                </div>
+                <!--end::User menu-->
+                <!--begin::Header menu toggle-->
+                <div class="app-navbar-item d-lg-none ms-2 me-n2" title="Show header menu">
+                    <div class="btn btn-flex btn-icon btn-active-color-primary w-30px h-30px" id="kt_app_header_menu_toggle">
+                        <i class="ki-duotone ki-element-4 fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                </div>
+                <!--end::Header menu toggle-->
+            </div>
+            <!--end::Navbar-->
+        </div>
+    </nav>
+    
+    <!-- Navbar End -->
+
+	<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
+	<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+		<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+			<!--begin::Main-->
+			<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+				<!--begin::Content wrapper-->
+				<div class="d-flex flex-column flex-column-fluid">
+						<!--begin::Content-->
+					<div id="kt_app_content" class="app-content flex-column-fluid">
+						<!--begin::Content container-->
+						<div id="kt_app_content_container" class="app-container container-xxl">
+							<!--begin::Layout-->
+							<div class="d-flex flex-column flex-xl-row">
+								<!--begin::Sidebar-->
+								<div class="flex-column flex-lg-row-auto w-100 w-xl-350px mb-10">
+									<!--begin::Card-->
+									<div class="card mb-5 mb-xl-8">
+										<!--begin::Card body-->
+										<div class="card-body pt-15">
+											<!--begin::Summary-->
+											<div class="d-flex flex-center flex-column mb-5">
+												<!--begin::Avatar-->
+												<div id="display_picture" class="symbol symbol-150px symbol-circle mb-7">
+													
+												</div>
+												<!--end::Avatar-->
+												<!--begin::Name-->
+												<a id="display_name" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1">Christian Cute</a>
+												<!--end::Name-->
+												<!--begin::Email-->
+												<a id="display_email" href="#" class="fs-5 fw-semibold text-muted text-hover-primary mb-6">Email</a>
+												<!--end::Email-->
+											</div>
+											<!--end::Summary-->
+											<div class="separator separator-dashed my-3"></div>
+											<!--begin::Details content-->
+											<div class="card card-flush mb-6 mb-xl-6">
+												<!--begin::Card header-->
+												<div class="card-header mt-6">
+													<!--begin::Card title-->
+													<div class="card-title flex-column">
+														<h2 class="mb-1">Appointments</h2>
+														<div id="total_appointments" class="fs-6 fw-semibold text-muted"></div>
+													</div>
+													<!--end::Card title-->
+													<!--begin::Card toolbar-->
+													<div class="card-toolbar">
+														<button type="button" class="btn btn-light-primary btn-sm" onclick="window.location.href='#'">
+														<i class="ki-duotone ki-add-files fs-3">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+														</i>Book an Appointment</button>
+													</div>
+													<!--end::Card toolbar-->
+												</div>
+												<!--end::Card header-->
+												<!--begin::Card body-->
+												<div id="appointment-list" class="card-body d-flex flex-column">
+													<!--begin::Item-->
+													
+													<!--end::Item-->
+												</div>
+												<!--end::Card body-->
+											</div>
+											<!--end::Details content-->
+										</div>
+										<!--end::Card body-->
+									</div>
+									<!--end::Card-->
+								</div>
+								<!--end::Sidebar-->
+								<!--begin::Content-->
+								<div class="flex-lg-row-fluid ms-lg-15">
+									<!--begin:::Tabs-->
+									<ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-8">
+										<!--begin:::Tab item-->
+										<li class="nav-item">
+											<a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_customer_overview">Overview</a>
+										</li>
+										<!--end:::Tab item-->
+										<!--begin:::Tab item-->
+										<li class="nav-item">
+											<a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_customer_general">Profile Details</a>
+										</li>
+										<!--end:::Tab item-->
+									</ul>
+									<!--end:::Tabs-->
+									<!--begin:::Tab content-->
+									<div class="tab-content" id="myTabContent">
+										<!--begin:::Tab pane-->
+										<div class="tab-pane fade show active" id="kt_ecommerce_customer_overview" role="tabpanel">
+											<div class="card pt-4 mb-6 mb-xl-9">
+												<!--begin::Card header-->
+												<div class="card-header border-0 pt-6">
+													
+													<!--begin::Card title-->
+													<div class="card-title">
+														<!--begin::Search-->
+														<div class="d-flex align-items-center position-relative my-1">
+															<h2>Medical History</h2>
+														</div>
+														
+														<!--end::Search-->
+													</div>
+													<!--begin::Card toolbar-->
+													<div class="card-toolbar">
+														<!--begin::Toolbar-->
+														<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+															<button type="button" class="btn btn-primary"
+															data-id=""
+															data-formid1="MedicalHistoryForm"
+															data-bs-toggle="modal" 
+															data-bs-target="#add_medical_modal"
+															id="add-btn">Add Medical history</button>
+														</div>
+														<!--end::Toolbar-->
+													</div>
+													<!--end::Card toolbar-->
+												</div>
+												<!--end::Card header-->
+												<!--begin::Card body-->
+												<div class="card-body pt-0">
+													<!--begin::Table-->
+													<table class="table align-middle table-row-dashed fs-6 gy-5" id="medHisTable">
+														<thead class="border-bottom border-gray-200 fs-7 fw-bold">
+															<tr class="text-start text-muted text-uppercase gs-0">
+																<th class="min-w-100px">Medical Condition</th>
+																<th>Medications</th>
+																<th>Allergies</th>
+																<th class="min-w-100px">Notes</th>
+																<th class="text-end min-w-70px">Actions</th>
+															</tr>
+														</thead>
+														<tbody id="medhis_table_body" class="fs-6 fw-semibold text-gray-600">
+															
+														</tbody>
+													</table>
+													<!--end::Table-->
+												</div>
+												<!--end::Card body-->
+											</div>			
+
+											<!--begin::Card-->
+											<div class="card pt-4 mb-6 mb-xl-9">
+												<!--begin::Card header-->
+												<div class="card-header border-0">
+													<!--begin::Card title-->
+													<div class="card-title">
+														<h2>Invoice List</h2>
+													</div>
+													<!--end::Card title-->
+												</div>
+												<!--end::Card header-->
+												<!--begin::Card body-->
+												<div class="card-body pt-0 pb-5">
+													<!--begin::Table-->
+													<table data-url="Delete_invoice" class="table align-middle table-row-dashed gy-5" id="invoiceTable">
+														<thead class="border-bottom border-gray-200 fs-7 fw-bold">
+															<tr class="text-start text-muted text-uppercase gs-0">
+																<th class="min-w-125px">Invoice No.</th>
+																<th class="min-w-100px">Total Price</th>
+																<th class="min-w-100px">Status</th>
+																<th class="min-w-100px">Invoice Date</th>
+																<th class="text-end min-w-70px">Actions</th>
+															</tr>
+														</thead>
+														<tbody id="invoice_table_body" class="fs-6 fw-semibold text-gray-600">
+															
+														</tbody>
+													</table>
+													<!--end::Table-->
+												</div>
+												<!--end::Card body-->
+											</div>
+											<!--end::Card-->
+										</div>
+										<!--end:::Tab pane-->
+										<!--begin:::Tab pane-->
+										<!-- profile tab -->
+										<div class="tab-pane fade" id="kt_ecommerce_customer_general" role="tabpanel">
+											<!--begin::Card-->
+											<div class="card pt-4 mb-6 mb-xl-9">
+												<!--begin::Card header-->
+												<div class="card-header border-0">
+													<!--begin::Card title-->
+													<div class="card-title">
+														<h2>Patient Profile</h2>
+													</div>
+													<!--end::Card title-->
+												</div>
+												<!--end::Card header-->
+												<!--begin::Card body-->
+												<div class="card-body pt-0 pb-5">
+													<!--begin::Form-->
+													<form class="form" enctype="multipart/form-data" id="patient-form">
+														<!--begin::Input group-->
+														<div class="mb-7">
+															<input type="hidden" name="formid" id="formid">
+															<!--begin::Label-->
+															<label class="fs-6 fw-semibold mb-2">
+																<span>Update Photo</span>
+																<span class="ms-1" data-bs-toggle="tooltip" title="Allowed file types: png, jpg, jpeg.">
+																	<i class="ki-duotone ki-information fs-7">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																		<span class="path3"></span>
+																	</i>
+																</span>
+															</label>
+															<!--end::Label-->
+															<!--begin::Image input wrapper-->
+															<div class="mt-1">
+																<!--begin::Image input placeholder-->
+																<style>.image-input-placeholder { background-image: url('{% static 'assets/media/svg/files/blank-image.svg' %}'); } [data-bs-theme="dark"] .image-input-placeholder { background-image: url('{% static 'assets/media/svg/files/blank-image-dark.svg' %}'); }</style>
+																<!--end::Image input placeholder-->
+																<!--begin::Image input-->
+																<div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
+																	<!--begin::Preview existing avatar-->
+																	<div class="image-input-wrapper w-250px h-250px" style="background-image: url('img/300-3.jpg')"></div>
+																	<!--end::Preview existing avatar-->
+																	<!--begin::Edit-->
+																	<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+																		<i class="ki-duotone ki-pencil fs-7">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																		</i>
+																		<!--begin::Inputs-->
+																		<input type="file" id="image_id" name="image" accept=".png, .jpg, .jpeg" />
+																		<input type="hidden" name="avatar_remove" />
+																		<!--end::Inputs-->
+																	</label>
+																	<!--end::Edit-->
+																	<!--begin::Cancel-->
+																	<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+																		<i class="ki-duotone ki-cross fs-2">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																		</i>
+																	</span>
+																	<!--end::Cancel-->
+																	<!--begin::Remove-->
+																	<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+																		<i class="ki-duotone ki-cross fs-2">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																		</i>
+																	</span>
+																	<!--end::Remove-->
+																</div>
+																<!--end::Image input-->
+															</div>
+															<!--end::Image input wrapper-->
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row row-cols-1 row-cols-md-2">
+															<div class="fv-row mb-7">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold mb-2 required">First Name</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input id="first_name" type="text" class="first-name form-control form-control-solid" placeholder="" name="first_name" />
+																<!--end::Input-->
+															</div>
+															<div class="fv-row mb-7">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold mb-2 required">Last Name</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input id="last_name" type="text" class="last-name form-control form-control-solid" placeholder="" name="last_name" value="Cute" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Row-->
+														<div class="row row-cols-1 row-cols-md-3">
+															<!--begin::Col-->
+															<div class="col">
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">
+																		<span class="required">Gender</span>
+																	</label>
+																	<select id="gender" class="gender form-control form-control-solid" name="gender" id="gender">
+																		<option value="Male">Male</option>
+																		<option value="Female">Female</option>
+																	</select>
+																</div>
+																<!--end::Input group-->
+															</div>
+															<div class="col">
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">
+																		<span class="required">Date of Birth</span>
+																	</label>
+																	<input id="birthdate" type="date" class="birthdate form-control form-control-solid" placeholder="Birthdate" name="birthdate" />
+																</div>
+																<!--end::Input group-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															<div class="col">
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">
+																		<span>Email*</span>
+																		<span class="ms-1" data-bs-toggle="tooltip" title="Email address must be active">
+																			<i class="ki-duotone ki-information fs-7">
+																				<span class="path1"></span>
+																				<span class="path2"></span>
+																				<span class="path3"></span>
+																			</i>
+																		</span>
+																	</label>
+																	<input id="email" type="email" class="email form-control form-control-solid" placeholder="" name="email" value="info@keenthemes.com" />
+																</div>
+																<!--end::Input group-->
+															</div>
+															<!--end::Col-->
+														</div>
+														<div class="row row-cols-1 row-cols-md-2">
+															<!--begin::Col-->
+															<div class="col">
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">
+																		<span class="required">Contact No.</span>
+																	</label>
+																	<input id="contact_no" type="text" class="contact-no form-control form-control-solid" placeholder="Contact No." name="contact_no" value="" />
+																</div>
+																<!--end::Input group-->
+															</div>
+															<div class="col">
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">
+																		<span class="required">Address</span>
+																	</label>
+																	<input id="address" type="text" class="address form-control form-control-solid" placeholder="Address" name="address" value="" />
+																</div>
+																<!--end::Input group-->
+															</div>
+															<!--end::Col-->
+														</div>
+														
+														<!--end::Row-->
+														<div class="d-flex justify-content-end">
+															<!--begin::Button-->
+															<button type="submit" id="kt_ecommerce_customer_profile_submit" class="btn btn-light-primary update-profile"
+															data-formid="PatientForm">
+																<span class="indicator-label">Save</span>
+																<span class="indicator-progress">Please wait... 
+																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+															</button>
+															<!--end::Button-->
+														</div>
+													</form>
+													<!--end::Form-->
+												</div>
+												<!--end::Card body-->
+											</div>
+											<!--end::Card-->
+										</div>
+										<!--end:::Tab pane-->
+									</div>
+									<!--end:::Tab content-->
+								</div>
+								<!--end::Content-->
+							</div>
+							<!--end::Layout-->
+						</div>
+						<!-- medical condition modal -->
+						<div class="modal fade" id="add_medical_modal" tabindex="-1" aria-hidden="true">
+							<!--begin::Modal dialog-->
+							<div class="modal-dialog modal-dialog-centered mw-650px">
+								<!--begin::Modal content-->
+								<div class="modal-content">
+									<!--begin::Form-->
+									
+									<form class="form" id="medical_form">
+										<!--begin::Modal header-->
+										<div class="modal-header" id="kt_modal_add_customer_header">
+											<!--begin::Modal title-->
+											<h2 class="fw-bold">Add a Medical Condition</h2>
+											<!--end::Modal title-->
+											<!--begin::Close-->
+											<div id="btn-close" class="btn btn-icon btn-sm btn-active-icon-primary">
+												<i class="ki-duotone ki-cross fs-1">
+													<span class="path1"></span>
+													<span class="path2"></span>
+												</i>
+											</div>
+											<!--end::Close-->
+										</div>
+										<!--end::Modal header-->
+										<!--begin::Modal body-->
+										<div class="modal-body py-10 px-lg-17">
+											<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+												<input type="hidden" name="id" id="id">
+												
+												<div class="fv-row mb-7">
+													<!--begin::Label-->
+													<label for="medical_condition" class="required fs-6 fw-semibold mb-2">Medical Condition</label>
+													<input type="text" class="form-control" id="medical_condition" name="medical condition" required>
+												</div>
+												<div class="fv-row mb-7">
+													<!--begin::Label-->
+													<label for="medication" class="required fs-6 fw-semibold mb-2">Medications</label>
+													<input type="text" class="form-control" id="medications" name="medication">
+												</div>
+												<div class="fv-row mb-7">
+													<label for="allergies" class="fs-6 fw-semibold mb-2">Allergies</label>
+													<input type="text" class="form-control" id="allergies" name="allergies">
+												</div>
+												<div class="fv-row mb-7">
+													<label for="notes" class="fs-6 fw-semibold mb-2">Notes</label>
+													<input type="text" class="form-control" id="notes" name="notes">
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer flex-center">
+											<button type="reset" id="btn-cancel" class="btn btn-light me-3">Discard</button>
+											<button type="submit" id="btn-submit" class="btn btn-primary">
+												<span class="indicator-label">Submit</span>
+												<span class="indicator-progress">Please wait... 
+												<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+											</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						
+						<!--end::Content container-->
+					</div>
+						<!--end::Content-->
+				</div>
+				<!--end::Content wrapper-->
+			</div>
+			<!--end:::Main-->
+		</div>
+		<!--end::Page-->
+	</div>
+
+    <div class="container-fluid text-light py-4" style="background: #051225;">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Your Site Name</a>. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Designed by <a class="text-white border-bottom" href="https://htmlcodex.com">HTML Codex</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+	
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="lib/twentytwenty/jquery.event.move.js"></script>
+    <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+	<script src="js/checkloginStatus.js"></script>
+	<script src="js/profile.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+	<script src="js/plugins.bundle.js"></script>
+    <script src="js/scripts.bundle.js"></script>
+	<script src="js/datatables.bundle.js"></script>
+    <script src="js/list.js"></script>
+	<script src="js/add.js"></script>
+	<script src="js/widgets.bundle.js"></script>
+
+	<script>
+		KTUtil.onDOMContentLoaded(function() {
+			medicalModalForm.init("add_medical_modal", "medical_form");
+		});
+	</script>
+	
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bungal Dental Clinic</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .top-bar {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            font-size: 0.9rem;
+            padding: 5px 0;
+        }
+        .navbar {
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            color: #00b8e4 !important;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            font-family: 'Jost', sans-serif;
+            padding: 35px 15px;
+            font-size: 18px;
+            color: var(#091E3E);
+            outline: none;
+            transition: .5s;
+        }
+        .navbar-nav .nav-link:hover, 
+        .navbar-nav .nav-link:focus,
+        .navbar-nav .nav-item.active .nav-link {
+            color: #00b8e4;
+        }
+        .dropdown-toggle::after {
+            vertical-align: middle;
+        }
+        .user-icon {
+            background-color: #00b8e4;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .user-dropdown .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+        }
+        .user-dropdown .dropdown-item img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <i class="far fa-clock me-2"></i>
+                Opening Hours: Monday - Friday, 8:00 am - 5:00 pm
+            </div>
+            <div>
+                <span class="me-3">
+                    <i class="far fa-envelope me-2"></i>
+                    <a href="mailto:bungal@gmail.com" class="text-decoration-none text-secondary">bungal@gmail.com</a>
+                </span>
+                <span>
+                    <i class="fas fa-phone-alt me-2"></i>
+                    vcbcbcvb
+                </span>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="#">Bungal Dental Clinic</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Service</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Pages
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Page 1</a></li>
+                            <li><a class="dropdown-item" href="#">Page 2</a></li>
+                            <li><a class="dropdown-item" href="#">Page 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item ms-2 dropdown">
+                        <div class="user-icon" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <ul class="dropdown-menu dropdown-menu-end user-dropdown" aria-labelledby="userDropdown">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <img src="/placeholder.svg?height=30&width=30" alt="My Profile">
+                                    <span>My Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <img src="/placeholder.svg?height=30&width=30" alt="Account Settings">
+                                    <span>Account Settings</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <img src="/placeholder.svg?height=30&width=30" alt="Sign Out">
+                                    <span>Sign Out</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

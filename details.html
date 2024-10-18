@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DentCare - Dental Clinic Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
+        <div class="row gx-0">
+            <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                <div id="openingHrs" class="d-inline-flex align-items-center">
+                    
+                </div>
+            </div>
+            <div class="col-md-6 text-center text-lg-end">
+                <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    <div id="clinic_email" class="me-3 pe-3 border-end py-2">
+                        
+                    </div>
+                    <div id="clinic_contact" class="py-2">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="index.html" class="navbar-brand p-0">
+            <h1 id="clinic_name" class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="service.html">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="appointment.html">Book an Appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sign-in.html" id="btn-sign_in" style="display: none;">Sign-In/Sign-up</a>
+                </li>
+                <li class="nav-item ms-2 dropdown">
+                    <div class="user-icon" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div id="profile_picture">
+                            
+                        </div>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown menu-rounded" aria-labelledby="userDropdown">
+                        <li>
+                            <a class="dropdown-item" href="details.html">
+                                <!-- <img src="img/300-3.jpg?height=30&width=30" alt="My Profile"> -->
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <div class="separator my-2"></div>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <span>Account Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="btn_signout" class="dropdown-item" href="#">
+                                <span>Sign Out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-4 col-lg-3 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div id="display_picture" class="symbol symbol-150px symbol-circle mb-7">
+													
+                        </div>
+                        <a id="display_name" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1">Christian Cute</a>
+                        <a id="display_email" href="#" class="fs-5 fw-semibold text-muted text-hover-primary mb-6">Email</a>
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Appointments</h5>
+                        <p class="card-text text-muted" id="total_appointments"></p>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="bi bi-calendar-plus me-2"></i>Book an Appointment
+                        </button>
+                        <div id="appointment-list" class="mt-3">
+                            <!-- Appointments will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-8 col-lg-9">
+                <ul class="nav nav-tabs mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#overview">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#profile">Profile Details</a>
+                    </li>
+                </ul>
+                
+                <div class="tab-content">
+                    <!-- Overview Tab -->
+                    <div class="tab-pane fade show active" id="overview">
+                        <!-- Medical History -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="card-title">Medical History</h5>
+                                    <button class="btn btn-primary" 
+                                    data-id=""
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#add_medical_modal"
+                                    id="add-btn">
+                                        Add Medical History
+                                    </button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table" id="medHisTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Medical Condition</th>
+                                                <th>Medications</th>
+                                                <th>Allergies</th>
+                                                <th>Notes</th>
+                                                <th class="text-end">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="medhis_table_body">
+                                            <!-- Medical history rows will be dynamically added here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Invoice List -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Invoice List</h5>
+                                <div class="table-responsive">
+                                    <table class="table" id="invoiceTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Invoice No.</th>
+                                                <th>Total Price</th>
+                                                <th>Status</th>
+                                                <th>Invoice Date</th>
+                                                <th class="text-end">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="invoice_table_body">
+                                            <!-- Invoice rows will be dynamically added here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Tab -->
+                    <div class="tab-pane fade" id="profile">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Patient Profile</h5>
+                                <form id="patient-form">
+                                    
+                                    <div class="mb-4">
+                                        <label for="photo-upload" class="form-label">Update Photo</label>
+                                        <div class="d-flex align-items-center">
+                                            <div id="profile-picture" class="symbol symbol-150px symbol-circle mb-7">
+													
+                                            </div>
+                                            <input type="file" class="form-control" id="photo-upload" accept="image/*" style="display: none;">
+                                            <label for="photo-upload" class="btn btn-outline-primary">Change Photo</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">First Name</label>
+                                            <input type="text" class="first-name form-control" id="first_name" name="first_name" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Last Name</label>
+                                            <input type="text" class="last-name form-control" id="last_name" name="last_name" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="genderform-label">Gender</label>
+                                            <select class="gender form-select" id="gender" name="gender">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Date of Birth</label>
+                                            <input type="date" class=" birthdate form-control" id="birthdate" name="birthdate">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="email form-control" id="email" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Contact No.</label>
+                                            <input type="text" class="contact-no form-control" id="contact_no" name="contact_no">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Address</label>
+                                            <input type="text" class="address form-control" id="address" name="address">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Medical History Modal -->
+    <div class="modal fade" id="add_medical_modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Medical Condition</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="medical_form">
+                        <input type="hidden" name="id" id="id">
+                        <div class="mb-3">
+                            <label for="medical_condition" class="form-label">Medical Condition</label>
+                            <input type="text" class="form-control" id="medical_condition" name="medical_condition" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="medications" class="form-label">Medications</label>
+                            <input type="text" class="form-control" id="medications" name="medications">
+                        </div>
+                        <div class="mb-3">
+                            <label for="allergies" class="form-label">Allergies</label>
+                            <input type="text" class="form-control" id="allergies" name="allergies">
+                        </div>
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Notes</label>
+                            <textarea class="form-control" id="notes" name="notes"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" id="btn-cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" id="btn-submit" class="btn btn-primary" id="saveMedicalHistory">Save</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="lib/twentytwenty/jquery.event.move.js"></script>
+    <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+	<script src="js/checkloginStatus.js"></script>
+	<script src="js/profile.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/list.js"></script>
+</body>
+</html>
