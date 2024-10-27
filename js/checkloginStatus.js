@@ -2,14 +2,15 @@ $(document).ready(function() {
     function checkLoginStatus() {
         const token = localStorage.getItem('access_token');
         
-        
         if (token) {
             // If token exists, show the dropdown
             $('#user-dropdown').show();
+            $('#notifDropdown').show();
             $('#btn-sign_in').hide();
         } else {
             // If token does not exist, hide the dropdown
             $('#user-dropdown').hide();
+            $('#notifDropdown').hide();
             $('#btn-sign_in').show();
         }
     }
@@ -94,6 +95,7 @@ $(document).ready(function() {
                             console.error("Error refreshing token:", error);
                             
                             $('#user-dropdown').hide();
+                            $('#notifDropdown').hide();
                             $('#btn-sign_in').show();
                         });
                     } else {

@@ -377,3 +377,28 @@ h6,
     height: 150px;
     object-fit: cover;
 }
+
+.user-dropdown {
+    min-width: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.9rem;
+}
+
+.user-dropdown .dropdown-item {
+    transition: background-color 0.2s ease;
+}
+
+.user-dropdown .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.user-dropdown .dropdown-item i {
+    width: 20px;
+    text-align: center;
+}
+
+.user-dropdown .dropdown-divider {
+    margin: 0.5rem 0;
+    opacity: 0.1;
+}

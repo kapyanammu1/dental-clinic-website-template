@@ -33,22 +33,29 @@ $(document).ready(function() {
                 return;
             }
     
-            $.ajax({
-                url: refreshUrl,
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    refresh: refreshToken
-                }),
-                success: function(response) {
-                    // Save the new access token and resolve the promise
-                    localStorage.setItem('access_token', response.access);
-                    resolve();
+            fetch(refreshUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
                 },
-                error: function(xhr) {
-                    reject("Failed to refresh token.");
-                    window.location.href = 'sign-in.html';
+                body: JSON.stringify({
+                    refresh: refreshToken
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                return response.json();
+            })
+            .then(data => {
+                // Save the new access token and resolve the promise
+                localStorage.setItem('access_token', data.access);
+                resolve();
+            })
+            .catch(error => {
+                reject("Failed to refresh token.");
+                window.location.href = 'sign-in.html';
             });
         });
     }
@@ -63,80 +70,72 @@ $(document).ready(function() {
         }
     
         if (token) {
-            $.ajax({
-                url: apiUrl,
-                type: 'GET',
+            fetch(apiUrl, {
+                method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + token
-                },
-                success: function(data) {
-                    // Assuming data.image exists and contains the correct image URL
-                    const imageWrapper = document.querySelector('.image-input-wrapper');
-                    const first_name = document.querySelector('.first-name');
-                    const last_name = document.querySelector('.last-name');
-                    const gender = document.querySelector('.gender');
-                    const birthdate = document.querySelector('.birthdate');
-                    const contact_no = document.querySelector('.contact-no');
-                    const email = document.querySelector('.email');
-                    const address = document.querySelector('.address');
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Assuming data.image exists and contains the correct image URL
+                const imageWrapper = document.querySelector('.image-input-wrapper');
+                const first_name = document.querySelector('.first-name');
+                const last_name = document.querySelector('.last-name');
+                const gender = document.querySelector('.gender');
+                const birthdate = document.querySelector('.birthdate');
+                const contact_no = document.querySelector('.contact-no');
+                const email = document.querySelector('.email');
+                const address = document.querySelector('.address');
 
-                    first_name.value = `${data.first_name}`;
-                    last_name.value = `${data.last_name}`;
-                    gender.value = `${data.gender}`;
-                    birthdate.value = `${data.date_of_birth}`;
-                    contact_no.value = `${data.contact_number}`;
-                    email.value = `${data.email}`;
-                    address.value = `${data.address}`;
+                first_name.value = `${data.first_name}`;
+                last_name.value = `${data.last_name}`;
+                gender.value = `${data.gender}`;
+                birthdate.value = `${data.date_of_birth}`;
+                contact_no.value = `${data.contact_number}`;
+                email.value = `${data.email}`;
+                address.value = `${data.address}`;
 
-                    $('#display_name').html(
-                        `${data.first_name} ${data.last_name}`
-                    );
+                document.getElementById('display_name').innerHTML = `${data.first_name} ${data.last_name}`;
+                document.getElementById('display_email').innerHTML = `${data.email}`;
 
-                    $('#display_email').html(
-                        `${data.email}`
-                    );
+                if (data.image) {
+                    document.getElementById('display_picture').innerHTML = 
+                        `<img src="${data.image}?height=150&width=150" alt="image" class="rounded-circle profile-image mb-3" />`;
+                    document.getElementById('profile-picture').innerHTML = 
+                        `<img src="${data.image}?height=150&width=150" alt="Profile" class="profile-image me-3" id="profile-image">`;
+                } else {
+                    document.getElementById('display_picture').innerHTML = 
+                        `<img src="img/default.jpg?height=150&width=150" alt="user" class="rounded-circle profile-image mb-3" />`;
+                }
+                
+                // document.getElementById('patient_name').innerHTML = `${data.first_name} ${data.last_name}`;
+                // document.getElementById('patient_email').innerHTML = `${data.email}`;
 
-                    if (data.image) {
-                        $('#display_picture').html(
-                            `<img src="${data.image}?height=150&width=150" alt="image" class="rounded-circle profile-image mb-3" />`
-                        );
-                        // imageWrapper.style.backgroundImage = `url(${data.image})`;
-                        $('#profile-picture').html(
-                            `<img src="${data.image}?height=150&width=150" alt="Profile" class="profile-image me-3" id="profile-image">`
-                        );
-                    } else {
-                        $('#display_picture').html(
-                            `<img src="img/default.jpg?height=150&width=150" alt="user" class="rounded-circle profile-image mb-3" />`
-                        );
-                        // imageWrapper.style.backgroundImage = `url(${data.image})`;
-                    }
-                    
-                    $('#patient_name').html(
-                        `${data.first_name} ${data.last_name}`
-                    );
-                    $('#patient_email').html(
-                        `${data.email}`
-                    );
-                    fetchMedical_historyData();
-                    fetchInvoiceData();  // Retry after refreshing
-                    fetchAppointmentData();
-                },
-                error: function(xhr) {
-                    if (xhr.status === 401) {
-                        // console.error("Access token expired, refreshing...");
-                        refreshToken().then(() => {
-                            fetchPatientData();
-                            fetchMedical_historyData();
-                            fetchInvoiceData();  // Retry after refreshing
-                            fetchAppointmentData();
-                        }).catch((error) => {
-                            console.error("Error refreshing token:", error);
-                            $('#user-dropdown').hide();
-                            $('#btn-sign_in').show();
-                        });
-                    } else {
-                        console.error("Error fetching patient data:", xhr);
-                    }
+                fetchMedical_historyData();
+                fetchInvoiceData();
+                fetchAppointmentData();
+            })
+            .catch(error => {
+                if (error.message === 'Network response was not ok' && error.response && error.response.status === 401) {
+                    // Token expired, refresh and retry
+                    refreshToken().then(() => {
+                        fetchPatientData();
+                        fetchMedical_historyData();
+                        fetchInvoiceData();
+                        fetchAppointmentData();
+                    }).catch((refreshError) => {
+                        console.error("Error refreshing token:", refreshError);
+                        document.getElementById('user-dropdown').style.display = 'none';
+                        document.getElementById('btn-sign_in').style.display = 'block';
+                    });
+                } else {
+                    console.error("Error fetching patient data:", error);
                 }
             });
         }
@@ -152,47 +151,53 @@ $(document).ready(function() {
         }
 
         if (token) {
-            $.ajax({
-                url: medhisUrl,
-                type: 'GET',
+            fetch(medhisUrl, {
+                method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + token
-                },
-                success: function(data) {
-                    
-                    $('#medhis_table_body').empty();
-                    data.forEach(medhis => {                             
-                        $('#medhis_table_body').append(
-                            `<tr id="medhis_row_${medhis.id}" data-pk="${medhis.id}">
-                                <td>${medhis.medical_condition}</td>
-                                <td>${medhis.medications}</td>
-                                <td>${medhis.allergies}</td>
-                                <td>${medhis.notes}</td>
-                                <td class="text-end">
-                                <button class="edit-btn btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" 
-                                    data-formid1="MedicalHistoryForm" 
-                                    data-id="${medhis.id}" 
-                                    data-medical_condition="${medhis.medical_condition}" 
-                                    data-medications="${medhis.medications}" 
-                                    data-allergies="${medhis.allergies}"
-                                    data-notes="${medhis.notes}"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#add_medical_modal"
-                                    id="edit_btn">Edit
-                                </button>
-                                <button class="delete-btn btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" 
-                                    data-id="${medhis.id}" 
-                                    data-kt-customer-table-filter="delete_row">Delete
-                                </button>
-                                </td>
-                            </tr>`
-                        );
-                    });
-                },
-                error: function(xhr) {
-                    console.error("Error fetching data:", xhr);
                 }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                $('#medhis_table_body').empty();
+                data.forEach(medhis => {
+                    $('#medhis_table_body').append(
+                        `<tr id="medhis_row_${medhis.id}" data-pk="${medhis.id}">
+                            <td>${medhis.medical_condition}</td>
+                            <td>${medhis.medications}</td>
+                            <td>${medhis.allergies}</td>
+                            <td>${medhis.notes}</td>
+                            <td class="text-end">
+                            <button class="edit-btn btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" 
+                                data-formid1="MedicalHistoryForm" 
+                                data-id="${medhis.id}" 
+                                data-medical_condition="${medhis.medical_condition}" 
+                                data-medications="${medhis.medications}" 
+                                data-allergies="${medhis.allergies}"
+                                data-notes="${medhis.notes}"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#add_medical_modal"
+                                id="edit_btn">Edit
+                            </button>
+                            <button class="delete-btn btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" 
+                                data-id="${medhis.id}" 
+                                data-kt-customer-table-filter="delete_row">Delete
+                            </button>
+                            </td>
+                        </tr>`
+                    );
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
             });
+
+            
         }
     }
 
@@ -206,64 +211,67 @@ $(document).ready(function() {
         }
     
         if (token) {
-            $.ajax({
-                url: invoiceUrl,
-                type: 'GET',
+            fetch(invoiceUrl, {
+                method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + token
-                },
-                success: function(data) {
-                    
-                    $('#invoice_table_body').empty();
-                    data.forEach(invoice => {
-                        let paidclass = "";
-                        let paidText = "";
-
-                        // Determine the badge class and text based on the payment status
-                        if (invoice.paid == true) {
-                            paidclass = "badge badge-light-success";
-                            paidText = "PAID";
-                        } else {
-                            paidclass = "badge badge-light-danger";
-                            paidText = "NOT PAID";
-                        }
-
-                        const invoiceDate = new Date(invoice.invoice_date);
-                        const formattedDate = invoiceDate.toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit'
-                        });
-                                            
-                        $('#invoice_table_body').append(
-                            `<tr data-id="${invoice.id}">
-                                <td>${invoice.invoice_number}</td>
-                                <td>${invoice.total_sum}</td>
-                                <td class="pe-0" data-order="Completed">
-                                    <div class="${paidclass}">${paidText}</div>
-                                </td>
-                                <td>${formattedDate}</td>
-                                <td class="text-end">
-                                    <button class="view-btn btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" 
-                                        data-id="${invoice.id}" 
-                                        data-kt-customer-table-filter="delete_row">View Details
-                                    </button>
-                                </td>
-                            </tr>`
-                        );
-                    });
-                    // Reinitialize dropdowns (if using Bootstrap)
-                    $('#invoice_table_body [data-kt-menu="true"]').dropdown();
-                },
-                error: function(xhr) {
-                    console.error("Error fetching data:", xhr);
                 }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                $('#invoice_table_body').empty();
+                data.forEach(invoice => {
+                    let paidclass = "";
+                    let paidText = "";
+
+                    // Determine the badge class and text based on the payment status
+                    if (invoice.paid == true) {
+                        paidclass = "badge badge-light-success";
+                        paidText = "PAID";
+                    } else {
+                        paidclass = "badge badge-light-danger";
+                        paidText = "NOT PAID";
+                    }
+
+                    const invoiceDate = new Date(invoice.invoice_date);
+                    const formattedDate = invoiceDate.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                    });
+                                        
+                    $('#invoice_table_body').append(
+                        `<tr data-id="${invoice.id}">
+                            <td>${invoice.invoice_number}</td>
+                            <td>${invoice.total_sum}</td>
+                            <td class="pe-0" data-order="Completed">
+                                <div class="${paidclass}">${paidText}</div>
+                            </td>
+                            <td>${formattedDate}</td>
+                            <td class="text-end">
+                                <button class="view-btn btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" 
+                                    data-id="${invoice.id}" 
+                                    data-kt-customer-table-filter="delete_row">View Details
+                                </button>
+                            </td>
+                        </tr>`
+                    );
+                });
+                $('#invoice_table_body [data-kt-menu="true"]').dropdown();
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
             });
         }
     }
 
     function fetchAppointmentData() {
-        const medhisUrl = 'http://localhost:8000/api/appointment_client/';
+        const appointmentUrl = 'http://localhost:8000/api/appointment_client/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -272,83 +280,80 @@ $(document).ready(function() {
         }
 
         if (token) {
-            $.ajax({
-                url: medhisUrl,
-                type: 'GET',
+            fetch(appointmentUrl, {
+                method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + token
-                },
-                success: function(data) {
-                    $('#total_appointments').html(`Total of ${data.length} appointment/s`);
-
-                    $('#appointment-list').empty();
-                    if (data && data.length > 0) {
-                        data.forEach(appointment => {     
-                            const appointmentDate = new Date(appointment.appointment_date);
-                            const formattedDate = appointmentDate.toLocaleDateString('en-US', {
-                                year: 'numeric',
-                                month: '2-digit',
-                                day: '2-digit'
-                            });
-                            $('#appointment-list').append(
-                                `<div class="d-flex align-items-center position-relative mb-7">
-                                    <div class="position-absolute top-0 start-0 rounded h-100 bg-secondary w-4px"></div>
-                                    <div class="fw-semibold ms-5">
-                                        <a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary">appointment with ${appointment.dentist_name}</a>
-                                        <div class="fs-7 text-muted">${formattedDate}</div>
-                                        <div>${formatTimeStringTo12Hour(appointment.start_time)} - ${formatTimeStringTo12Hour(appointment.end_time)}</div>
-                                    </div>						
-                                 </div>
-                                `
-                            );
-                        });
-                    } else {
-                        $('#appointment-list').append('<p>No appointments found.</p>');
-                    }
-                    
-                },
-                error: function(xhr) {
-                    console.error("Error fetching data:", xhr);
                 }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Update the total appointments count
+                $('#total_appointments').html(`Total ${data.length} appointment${data.length !== 1 ? 's' : ''}`);
+
+                // Clear existing appointments
+                $('#appointment-list').empty();
+
+                // Add each appointment
+                data.forEach(appointment => {
+                    const appointmentDate = new Date(appointment.appointment_date);
+                    const formattedDate = appointmentDate.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+
+                let statusClass = "";
+                let statusText = "";
+                switch(appointment.status) {
+                    case 'Pending':
+                        statusClass = "badge badge-light-primary";
+                        statusText = "Upcoming";
+                        break;
+                    case 'Completed':
+                        statusClass = "badge badge-light-success";
+                        statusText = "Completed";
+                        break;
+                    case 'Approved':
+                        statusClass = "badge badge-light-success";
+                        statusText = "Approved";
+                        break;
+                    case 'Cancelled':
+                        statusClass = "badge badge-light-danger";
+                        statusText = "Cancelled";
+                        break;
+                    default:
+                        statusClass = "badge badge-light-warning";
+                        statusText = appointment.status;
+                }
+                    
+                    $('#appointment-list').append(`
+                        <div class="card card-flush mb-5">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold mb-1">Appointment with ${appointment.dentist_name}</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="text-muted mb-0">${formattedDate}</p>
+                                        <p class="text-muted mb-0">
+                                            ${formatTimeStringTo12Hour(appointment.start_time)} - ${formatTimeStringTo12Hour(appointment.end_time)}
+                                        </p>
+                                    </div>
+                                    <span>${statusText}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
             });
         }
-    }
-
-    function fetchClinicInfo() {
-        const apiUrl = 'http://localhost:8000/api/clinic-info/';
-
-        $.ajax({
-            url: apiUrl,
-            type: 'GET',
-            success: function(data) {
-                // Assuming data.image exists and contains the correct image URL
-                    $('#openingHrs').html(
-                        `<small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: ${data.open_hours} </small>`
-                    );
-                    $('#clinic_email').html(
-                        `<p class="m-0"><i class="fa fa-envelope-open me-2"></i>${data.email}</p>`
-                    );
-                    $('#clinic_contact').html(
-                        `<p class="m-0"><i class="fa fa-phone-alt me-2"></i>${data.contact_no}</p>`
-                    );
-                    $('#clinic_name').html(
-                        `<h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>${data.clinic_name}</h1>`
-                    );
-            },
-            error: function(xhr) {
-                if (xhr.status === 401) {
-                    console.error("Access token expired, refreshing...");
-                    refreshToken().then(() => {
-                        fetchPatientData();  // Retry after refreshing
-                    }).catch((error) => {
-                        console.error("Error refreshing token:", error);
-                        // Handle logout or further actions
-                    });
-                } else {
-                    console.error("Error fetching patient data:", xhr);
-                }
-            }
-        });
     }
 
     $('#add-btn').click(function(event) {
@@ -392,38 +397,45 @@ $(document).ready(function() {
             }
         }).then((result) => {
             if (result.value) {
-                $.ajax({
-                    type: "DELETE",
-                    url: deleteUrl,
+                fetch(deleteUrl, {
+                    method: 'DELETE',
                     headers: {
                         'Authorization': 'Bearer ' + token,
                         'Content-Type': 'application/json'
                     },
-                    data: JSON.stringify({ id: medhisId }),
-                    success: function() {
-                        Swal.fire({
-                            text: "You have deleted the record successfully!!",
-                            icon: "success",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then(() => {
-                            $(`#medhis_row_${medhisId}`).remove();
-                        });
-                    },
-                    error: function() {
-                        Swal.fire({
-                            text: "Error deleting the record.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        });
+                    body: JSON.stringify({ id: medhisId })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
+                    // Check if the response has content before parsing JSON
+                    return response.text().then(text => text ? JSON.parse(text) : {});
+                })
+                .then(() => {
+                    Swal.fire({
+                        text: "You have deleted the record successfully!!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    }).then(() => {
+                        $(`#medhis_row_${medhisId}`).remove();
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        text: "Error deleting the record: " + error.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    });
                 });
                 
             } else if (result.dismiss === "cancel") {
@@ -489,41 +501,44 @@ $(document).ready(function() {
         formData.append('address', $('#address').val());
         formData.append('email', $('#email').val());
 
-        $.ajax({
-            url: updateUrl,
-            type: 'PUT',
-            processData: false,  // Important for FormData
-            contentType: false,
+        fetch(updateUrl, {
+            method: 'PUT',
             headers: {
                 'Authorization': 'Bearer ' + token
             },
-            data: formData,
-            success: function(response) {
-                Swal.fire({
-                    text: "Profile updated successfully.",
-                    icon: "success",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                }).then((function(e) {
-                    if (e.isConfirmed) {
-                        fetchPatientData();
-                    }
-                }))
-            },
-            error: function(error) {
-                Swal.fire({
-                    text: "There was an error. Please check your input.",
-                    icon: "error",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                });
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
+            return response.json();
+        })
+        .then(response => {
+            Swal.fire({
+                text: "Profile updated successfully.",
+                icon: "success",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetchPatientData();
+                }
+            });
+        })
+        .catch(error => {
+            Swal.fire({
+                text: "There was an error. Please check your input.",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
         });
     });
 
@@ -547,41 +562,44 @@ $(document).ready(function() {
 
         let post_type = $('#id').val() === "" ? 'POST' : 'PUT';
 
-        $.ajax({
-            url: AddUrl,
-            type: post_type,
-            processData: false,  // Important for FormData
-            contentType: false,
+        fetch(AddUrl, {
+            method: post_type,
             headers: {
                 'Authorization': 'Bearer ' + token
             },
-            data: formData,
-            success: function(response) {
-                Swal.fire({
-                    text: "Medical History added successfully.",
-                    icon: "success",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                }).then((function(e) {
-                    if (e.isConfirmed) {
-                        window.location.reload();
-                    }
-                }))
-            },
-            error: function(error) {
-                Swal.fire({
-                    text: "There was an error. Please check your input.",
-                    icon: "error",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                });
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
+            return response.json();
+        })
+        .then(response => {
+            Swal.fire({
+                text: "Medical History added successfully.",
+                icon: "success",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload();
+                }
+            });
+        })
+        .catch(error => {
+            Swal.fire({
+                text: "There was an error. Please check your input.",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
         });
     });
 
@@ -598,5 +616,4 @@ $(document).ready(function() {
 
     checkLoginStatus();
     fetchPatientData();
-    fetchClinicInfo();
 });

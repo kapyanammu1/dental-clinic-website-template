@@ -144,26 +144,25 @@ $(document).ready(function() {
                 }
             });
         }
-        
     });
 
     function fetchTreatment() {
         const apiUrl = 'http://localhost:8000/api/treatments/';
-        $.ajax({
-            url: apiUrl,
-            type: 'GET',
-            success: function(data) {
-                const treatmentSelect = document.getElementById('treatment');
-                data.forEach(treatment => {
-                    const option = document.createElement('option');
-                    option.value = treatment.id;
-                    option.text = treatment.name;
-                    treatmentSelect.add(option);
-                });
-            },
-            error: function(error) {
-                console.error("Error fetching treatments:", error);
-            }
+        fetch(apiUrl, {
+            method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+            const treatmentSelect = document.getElementById('treatment');
+            data.forEach(treatment => {
+                const option = document.createElement('option');
+                option.value = treatment.id;
+                option.text = treatment.name;
+                treatmentSelect.add(option);
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching treatments:", error);
         });
     }
 

@@ -1,59 +1,79 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
     const signUpUrl = 'http://localhost:8000/api/signup/';
 
-    // Handle form submission
-    $('#kt_sign_up_form').on('submit', function(event) {
+    function showLoading(button) {
+        button.setAttribute('data-kt-indicator', 'on');
+        button.disabled = true;
+    }
+
+    // Function to hide loading indicator
+    function hideLoading(button) {
+        button.removeAttribute('data-kt-indicator');
+        button.disabled = false;
+    }
+
+    document.getElementById('kt_sign_up_form').addEventListener('submit', function(event) {
         event.preventDefault();
+        showLoading(document.getElementById('kt_sign_up_submit'));
 
         const newPatient = {
-            first_name: $('#first_name').val(),
-            last_name: $('#last_name').val(),
-            date_of_birth: $('#birthdate').val(),
-            gender: $('#gender').val(),
-            contact_number: $('#contact_no').val(),
-            address: $('#address').val(),
-            email: $('#email').val(),
+            first_name: document.getElementById('first_name').value,
+            last_name: document.getElementById('last_name').value,
+            date_of_birth: document.getElementById('birthdate').value,
+            gender: document.getElementById('gender').value,
+            contact_number: document.getElementById('contact_no').value,
+            address: document.getElementById('address').value,
+            email: document.getElementById('email').value,
             user_account: {
-                username: $('input[name="username"]').val(),
-                password1: $('input[name="password1"]').val(),
-                password2: $('input[name="password2"]').val()
+                username: document.querySelector('input[name="username"]').value,
+                password1: document.querySelector('input[name="password1"]').value,
+                password2: document.querySelector('input[name="password2"]').value,
+                is_patient: true
             }
         };
 
-        const token = localStorage.getItem('access_token');
-        $.ajax({
-            url: signUpUrl,
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(newPatient),
-            success: function(response) {
-                Swal.fire({
-                    text: "Account has been created successfully!",
-                    icon: "success",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                }).then((function(e) {
-                    if (e.isConfirmed) {
-                        $('#kt_sign_up_form')[0].reset();
-                        window.location.href = 'sign-in.html';
-                    }
-                }))
+        fetch(signUpUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
             },
-            error: function(xhr) {
-                console.error("Error saving record:", xhr);
-                Swal.fire({
-                    text: "There was an error. Please check your input.",
-                    icon: "error",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                });
+            body: JSON.stringify(newPatient)
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => Promise.reject(err));
             }
+            return response.json();
+        })
+        .then(data => {
+            Swal.fire({
+                text: "Account has been created successfully!",
+                icon: "success",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('kt_sign_up_form').reset();
+                    hideLoading(document.getElementById('kt_sign_up_submit'));
+                    window.location.href = 'sign-in.html';
+                }
+            });
+        })
+        .catch(error => {
+            console.error("Error saving record:", error);
+            Swal.fire({
+                text: error.message || "There was an error. Please check your input.",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
+            hideLoading(document.getElementById('kt_sign_up_submit'));
         });
     });
 });

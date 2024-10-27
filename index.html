@@ -97,27 +97,64 @@
                 <li class="nav-item">
                     <a class="nav-link" href="sign-in.html" id="btn-sign_in" style="display: none;">Sign-In/Sign-up</a>
                 </li>
+                <!-- <li class="nav-item ms-2 dropdown">
+                    <div class="user-icon position-relative" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-bell"></i>
+                        <span id="notificationCount" class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger">
+                            0
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end notification-dropdown shadow-sm border-0" aria-labelledby="notificationDropdown">
+                        <li class="dropdown-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">Notifications</h6>
+                            <span class="badge bg-primary rounded-pill">1</span>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item py-2 px-4" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-calendar-check text-success"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <p class="mb-0">Appointment Approved</p>
+                                        <small class="text-muted">Your appointment for dental cleaning has been approved.</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item text-center py-2" href="#">
+                                View All Notifications
+                            </a>
+                        </li>
+                    </ul>
+                </li> -->
                 <li class="nav-item ms-2 dropdown">
-                    <div class="user-icon" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="user-icon position-relative" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <div id="profile_picture">
                             
                         </div>
                     </div>
-                    <ul class="dropdown-menu dropdown-menu-end user-dropdown menu-rounded" aria-labelledby="userDropdown">
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown shadow-sm border-0" aria-labelledby="userDropdown">
                         <li>
-                            <a class="dropdown-item" href="details.html">
-                                <!-- <img src="img/300-3.jpg?height=30&width=30" alt="My Profile"> -->
+                            <a class="dropdown-item py-2 px-4" href="details.html">
+                                <i class="fas fa-user me-2 text-primary"></i>
                                 <span>My Profile</span>
                             </a>
                         </li>
-                        <div class="separator my-2"></div>
+                        <li><hr class="dropdown-divider my-2"></li>
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item py-2 px-4" href="#">
+                                <i class="fas fa-cog me-2 text-primary"></i>
                                 <span>Account Settings</span>
                             </a>
                         </li>
                         <li>
-                            <a id="btn_signout" class="dropdown-item" href="#">
+                            <a id="btn_signout" class="dropdown-item py-2 px-4" href="#">
+                                <i class="fas fa-sign-out-alt me-2 text-primary"></i>
                                 <span>Sign Out</span>
                             </a>
                         </li>
@@ -145,13 +182,12 @@
     </div>
     <!-- Full Screen Search End -->
 
-
     <!-- Carousel Start -->
     <div class="container-fluid p-0">
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="Image">
+                    <img class="w-100" src="img/carousel-1.jpg" alt="Dental clinic interior">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
@@ -162,7 +198,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="img/carousel-2.jpg" alt="Image">
+                    <img class="w-100" src="img/carousel-2.jpg" alt="Dentist examining patient">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
@@ -174,7 +210,7 @@
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="prev">
+                data-bs-slide="prev" aria-label="Previous slide">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
@@ -186,7 +222,6 @@
         </div>
     </div>
     <!-- Carousel End -->
-
 
     <!-- Banner Start -->
     <div class="container-fluid banner mb-5">
@@ -238,7 +273,6 @@
     </div>
     <!-- Banner Start -->
 
-
     <!-- About Start -->
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
@@ -249,7 +283,7 @@
                         <h1 class="display-5 mb-0">The World's Best Dental Clinic That You Can Trust</h1>
                     </div>
                     <h4 class="text-body fst-italic mb-4">Diam dolor diam ipsum sit. Clita erat ipsum et lorem stet no lorem sit clita duo justo magna dolore</h4>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod magna dolore erat amet</p>
+                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo eirmod magna dolore erat amet</p>
                     <div class="row g-3">
                         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.3s">
                             <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Award Winning</h5>
@@ -264,14 +298,13 @@
                 </div>
                 <div class="col-lg-5" style="min-height: 500px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="img/about.jpg" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="img/about.jpg" style="object-fit: cover;" loading="lazy" alt="About our dental clinic">
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- About End -->
-
 
     <!-- Appointment Start -->
     <div class="container-fluid bg-primary bg-appointment my-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -336,7 +369,6 @@
     </div>
     <!-- Appointment End -->
 
-
     <!-- Service Start -->
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
@@ -361,7 +393,6 @@
     </div>
     <!-- Service End -->
 
-
     <!-- Offer Start -->
     <div class="container-fluid bg-offer my-5 py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container py-5">
@@ -378,7 +409,6 @@
         </div>
     </div>
     <!-- Offer End -->
-
 
     <!-- Pricing Start -->
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -402,7 +432,6 @@
         </div>
     </div>
     <!-- Pricing End -->
-
 
     <!-- Testimonial Start -->
     <div class="container-fluid bg-primary bg-testimonial py-5 my-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -429,7 +458,6 @@
     </div>
     <!-- Testimonial End -->
 
-
     <!-- Team Start -->
     <div class="container-fluid py-5">
         <div class="container">
@@ -439,7 +467,6 @@
         </div>
     </div>
     <!-- Team End -->
-
 
     <!-- Newsletter Start -->
     <div class="container-fluid position-relative pt-5 wow fadeInUp" data-wow-delay="0.1s" style="z-index: 1;">
@@ -455,7 +482,6 @@
         </div>
     </div>
     <!-- Newsletter End -->
-    
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
@@ -535,8 +561,9 @@
     
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-    <script src="js/checkloginStatus.js"></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/checkloginStatus.js" defer></script>
+    <script src="js/notif.js" defer></script>
 </body>
 
 </html>

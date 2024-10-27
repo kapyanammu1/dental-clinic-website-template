@@ -1,48 +1,57 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
     const loginUrl = 'http://localhost:8000/api/token/';  // Adjust the URL to match your backend login API
 
-    $('#kt_sign_in_form').submit(function(event) {
+    document.getElementById('kt_sign_in_form').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission
         // Clear any previous errors
-        $('.form-control').removeClass('is-invalid');
+        document.querySelectorAll('.form-control').forEach(el => el.classList.remove('is-invalid'));
         // Gather form data
-        const username = $('input[name="username"]').val();
-        const password = $('input[name="password"]').val();
+        const username = document.querySelector('input[name="username"]').value;
+        const password = document.querySelector('input[name="password"]').value;
 
-        $.ajax({
-            url: loginUrl,
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
+        fetch(loginUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
                 username: username,
                 password: password
             }),
-            success: function(response) {
-                // Save the access token and refresh token in local storage
-                Swal.fire({
-                    text: "You have successfully logged in!",
-                    icon: "success",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                }).then((function() {
-                    localStorage.setItem('access_token', response.access);
-                    localStorage.setItem('refresh_token', response.refresh);
-                    // console.log(localStorage.getItem('access_token'));
-                    // console.log(localStorage.getItem('refresh_token'));
-                    // Redirect the user upon successful login
-                    window.location.href = $('#kt_sign_in_form').data('kt-redirect-url');
-                }));
-                
-            },
-            error: function(xhr, status, error) {
-                const errorDetail = xhr.responseJSON.detail;
-                console.log(errorDetail);
-                if (errorDetail == "Please verify your email before logging in.") {
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    throw errorData;
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+
+            if (data.patient_id) {
+                if (data.is_verified) { 
+                    localStorage.setItem('access_token', data.access);
+                    localStorage.setItem('refresh_token', data.refresh);
+                    localStorage.setItem('patient_id', data.patient_id);
+                    localStorage.setItem('patient_name', data.patient_name);
+
                     Swal.fire({
-                        text: "Please check your email to verify your account.",
+                        text: "You have successfully logged in!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    }).then(function() {
+                        // Redirect the user upon successful login
+                        window.location.href = document.getElementById('kt_sign_in_form').dataset.ktRedirectUrl;
+                    });
+                } else {
+                    // Email is not verified
+                    Swal.fire({
+                        text: "Please verify your email before logging in.",
                         icon: "warning",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
@@ -50,22 +59,58 @@ $(document).ready(function() {
                             confirmButton: "btn btn-primary"
                         }
                     });
-                } else {
-                    // Handle other login errors (e.g., incorrect credentials)
-                    Swal.fire({
-                        text: "Invalid username or password. Please try again.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    });
-                }
-                // Display error messages or add invalid classes to the form fields
-                $('input[name="username"]').addClass('is-invalid');
-                $('input[name="password"]').addClass('is-invalid');
+                }   
+            } else {
+                // If patient_id is not in the response, it's not a patient account
+                Swal.fire({
+                    text: "You do not have permission to access this system.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                }); 
             }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            const errorDetail = error.detail;
+            if (errorDetail === "Please verify your email before logging in.") {
+                Swal.fire({
+                    text: "Please check your email to verify your account.",
+                    icon: "warning",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            } else if (errorDetail === "You do not have permission to access this system.") {
+                Swal.fire({
+                    text: "Only patients can log in to this system.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            } else {
+                // Handle other login errors (e.g., incorrect credentials)
+                Swal.fire({
+                    text: "Invalid username or password. Please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
+            // Display error messages or add invalid classes to the form fields
+            document.querySelector('input[name="username"]').classList.add('is-invalid');
+            document.querySelector('input[name="password"]').classList.add('is-invalid');
         });
     });
 });
