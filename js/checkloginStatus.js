@@ -16,7 +16,7 @@ $(document).ready(function() {
     }
 
     function refreshToken() {
-        const refreshUrl = 'http://localhost:8000/api/token/refresh/';
+        const refreshUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/token/refresh/';
         const refreshToken = localStorage.getItem('refresh_token');
     
         return new Promise((resolve, reject) => {
@@ -46,7 +46,7 @@ $(document).ready(function() {
     }
 
     function fetchPatientData() {
-        const apiUrl = 'http://localhost:8000/api/patients/';
+        const apiUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/patients/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -108,7 +108,7 @@ $(document).ready(function() {
     }
 
     function fetchClinicInfo() {
-        const apiUrl = 'http://localhost:8000/api/clinic-info/';
+        const apiUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/clinic-info/';
 
         $.ajax({
             url: apiUrl,
@@ -120,6 +120,15 @@ $(document).ready(function() {
                     );
                     $('#clinic_email').html(
                         `<p class="m-0"><i class="fa fa-envelope-open me-2"></i>${data.email}</p>`
+                    );
+                    $('#contactus_email').html(
+                        `${data.email}`
+                    );
+                    $('#contactus_phone').html(
+                        `${data.contact_no}`
+                    );
+                    $('#contactus_address').html(
+                        `${data.clinic_address}`
                     );
                     $('#clinic_contact').html(
                         `<p class="m-0"><i class="fa fa-phone-alt me-2"></i>${data.contact_no}</p>`

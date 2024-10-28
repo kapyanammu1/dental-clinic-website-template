@@ -24,7 +24,7 @@ $(document).ready(function() {
     }
 
     function refreshToken() {
-        const refreshUrl = 'http://localhost:8000/api/token/refresh/';
+        const refreshUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/token/refresh/';
         const refreshToken = localStorage.getItem('refresh_token');
     
         return new Promise((resolve, reject) => {
@@ -61,7 +61,7 @@ $(document).ready(function() {
     }
     
     function fetchPatientData() {
-        const apiUrl = 'http://localhost:8000/api/patients/';
+        const apiUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/patients/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -142,7 +142,7 @@ $(document).ready(function() {
     }
 
     function fetchMedical_historyData() {
-        const medhisUrl = 'http://localhost:8000/api/medical-history/';
+        const medhisUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/medical-history/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -202,7 +202,7 @@ $(document).ready(function() {
     }
 
     function fetchInvoiceData() {
-        const invoiceUrl = 'http://localhost:8000/api/invoices/';
+        const invoiceUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/invoices/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -271,7 +271,7 @@ $(document).ready(function() {
     }
 
     function fetchAppointmentData() {
-        const appointmentUrl = 'http://localhost:8000/api/appointment_client/';
+        const appointmentUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/appointment_client/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -380,8 +380,8 @@ $(document).ready(function() {
     $('#medhis_table_body').on('click', '.delete-btn', function(event) {
         event.preventDefault();
         const tableRow = event.target.closest("tr")
-        const medhisId = $(this).data('id');  // Get the ID of the medical history record from a data attribute
-        const deleteUrl = `http://localhost:8000/api/medical-history/`;  // Adjust this to your API's endpoint
+        const medhisId = $(this).data('id'); 
+        const deleteUrl = `http://ec2-52-91-47-250.compute-1.amazonaws.com/api/medical-history/`;
         const token = localStorage.getItem('access_token');
 
         Swal.fire({
@@ -476,14 +476,14 @@ $(document).ready(function() {
                 localStorage.removeItem('access_token');
                 localStorage.removeItem('refresh_token');
     
-                window.location.href = 'index.html';  // Adjust this URL based on your app's routing
+                window.location.href = 'index.html';
             }
         });
     });
 
     $('#patient-form').on('submit', function(event) {
         event.preventDefault();
-        const updateUrl = 'http://localhost:8000/api/patients/';
+        const updateUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/patients/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -492,7 +492,7 @@ $(document).ready(function() {
         }
 
         const formData = new FormData();
-        formData.append('image', $('#photo-upload')[0].files[0]); // Get the file input
+        formData.append('image', $('#photo-upload')[0].files[0]);
         formData.append('first_name', $('#first_name').val());
         formData.append('last_name', $('#last_name').val());
         formData.append('date_of_birth', $('#birthdate').val());
@@ -545,7 +545,7 @@ $(document).ready(function() {
     $('#medical_form').on('submit', function(event) {
         event.preventDefault();
         console.log("asdasd");
-        const AddUrl = 'http://localhost:8000/api/medical-history/';
+        const AddUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/medical-history/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {

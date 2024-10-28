@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const loginUrl = 'http://localhost:8000/api/token/';  // Adjust the URL to match your backend login API
+    const loginUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/token/';
 
     document.getElementById('kt_sign_in_form').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission
@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
             body: JSON.stringify({
                 username: username,
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
 
             if (data.patient_id) {
+                console.log(data);
                 if (data.is_verified) { 
                     localStorage.setItem('access_token', data.access);
                     localStorage.setItem('refresh_token', data.refresh);
