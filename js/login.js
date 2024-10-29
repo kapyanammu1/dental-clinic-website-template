@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const loginUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/token/';
+    const loginUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/token/';
 
     document.getElementById('kt_sign_in_form').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission

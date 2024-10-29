@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    const socket = new WebSocket(`ws://ec2-52-91-47-250.compute-1.amazonaws.com/ws/notifications/`);
+    const socket = new WebSocket(`ws://ec2-44-204-79-164.compute-1.amazonaws.com/ws/notifications/`);
 
     socket.onopen = function(event) {
         console.log("WebSocket connection established.");

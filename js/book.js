@@ -16,7 +16,7 @@ $(document).ready(function() {
     }
 
     function refreshToken() {
-        const refreshUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/token/refresh/'; 
+        const refreshUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/token/refresh/'; 
         const refreshToken = localStorage.getItem('refresh_token');
     
         return new Promise((resolve, reject) => {
@@ -70,7 +70,7 @@ $(document).ready(function() {
 
     $('#appointment_form').on('submit', function(event) {
         event.preventDefault();
-        const appointmentUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/appointment_client/'; 
+        const appointmentUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/appointment_client/'; 
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -147,7 +147,7 @@ $(document).ready(function() {
     });
 
     function fetchTreatment() {
-        const apiUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/treatments/';
+        const apiUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/treatments/';
         fetch(apiUrl, {
             method: 'GET',
         })
@@ -167,7 +167,7 @@ $(document).ready(function() {
     }
 
     function fetchDentist() {
-        const apiUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/dentist/';
+        const apiUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/dentist/';
         $.ajax({
             url: apiUrl,
             type: 'GET',

@@ -73,7 +73,7 @@ var medicalModalForm = function() {
             });
 
             function refreshToken() {
-                const refreshUrl = 'http://localhost:8000/api/token/refresh/';
+                const refreshUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/token/refresh/';
                 const refreshToken = localStorage.getItem('refresh_token');
             
                 return new Promise((resolve, reject) => {

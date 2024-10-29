@@ -24,7 +24,7 @@ $(document).ready(function() {
     }
 
     function refreshToken() {
-        const refreshUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/token/refresh/';
+        const refreshUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/token/refresh/';
         const refreshToken = localStorage.getItem('refresh_token');
     
         return new Promise((resolve, reject) => {
@@ -61,7 +61,7 @@ $(document).ready(function() {
     }
     
     function fetchPatientData() {
-        const apiUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/patients/';
+        const apiUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/patients/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -142,7 +142,7 @@ $(document).ready(function() {
     }
 
     function fetchMedical_historyData() {
-        const medhisUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/medical-history/';
+        const medhisUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/medical-history/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -202,7 +202,7 @@ $(document).ready(function() {
     }
 
     function fetchInvoiceData() {
-        const invoiceUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/invoices/';
+        const invoiceUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/invoices/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -271,7 +271,7 @@ $(document).ready(function() {
     }
 
     function fetchAppointmentData() {
-        const appointmentUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/appointment_client/';
+        const appointmentUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/appointment_client/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -381,7 +381,7 @@ $(document).ready(function() {
         event.preventDefault();
         const tableRow = event.target.closest("tr")
         const medhisId = $(this).data('id'); 
-        const deleteUrl = `http://ec2-52-91-47-250.compute-1.amazonaws.com/api/medical-history/`;
+        const deleteUrl = `http://ec2-44-204-79-164.compute-1.amazonaws.com/api/medical-history/`;
         const token = localStorage.getItem('access_token');
 
         Swal.fire({
@@ -483,7 +483,7 @@ $(document).ready(function() {
 
     $('#patient-form').on('submit', function(event) {
         event.preventDefault();
-        const updateUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/patients/';
+        const updateUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/patients/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -545,7 +545,7 @@ $(document).ready(function() {
     $('#medical_form').on('submit', function(event) {
         event.preventDefault();
         console.log("asdasd");
-        const AddUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/medical-history/';
+        const AddUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/medical-history/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {

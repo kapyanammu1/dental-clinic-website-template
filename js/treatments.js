@@ -2,7 +2,7 @@ $(document).ready(function() {
     
     // Function to fetch and display patients
     function fetchTreatment() {
-        const apiUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/treatments/';
+        const apiUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/treatments/';
         $.ajax({
             url: apiUrl,
             type: 'GET',
@@ -47,7 +47,7 @@ $(document).ready(function() {
     }
 
     function fetchDentist() {
-        const apiUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/dentist/';
+        const apiUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/dentist/';
         $.ajax({
             url: apiUrl,
             type: 'GET',

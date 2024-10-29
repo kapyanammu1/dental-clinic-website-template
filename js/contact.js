@@ -23,7 +23,7 @@ async function handleSubmit(event) {
         const token = localStorage.getItem('access_token');
 
         // Send data to backend
-        const response = await fetch('http://ec2-52-91-47-250.compute-1.amazonaws.com/api/contact/', {
+        const response = await fetch('http://ec2-44-204-79-164.compute-1.amazonaws.com/api/contact/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

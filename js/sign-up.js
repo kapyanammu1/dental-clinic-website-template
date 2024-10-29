@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const signUpUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/signup/';
+    const signUpUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/signup/';
 
     function showLoading(button) {
         button.setAttribute('data-kt-indicator', 'on');

@@ -16,7 +16,7 @@ $(document).ready(function() {
     }
 
     function refreshToken() {
-        const refreshUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/token/refresh/';
+        const refreshUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/token/refresh/';
         const refreshToken = localStorage.getItem('refresh_token');
     
         return new Promise((resolve, reject) => {
@@ -46,7 +46,7 @@ $(document).ready(function() {
     }
 
     function fetchPatientData() {
-        const apiUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/patients/';
+        const apiUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/patients/';
         const token = localStorage.getItem('access_token');
 
         if (!token) {
@@ -108,7 +108,7 @@ $(document).ready(function() {
     }
 
     function fetchClinicInfo() {
-        const apiUrl = 'http://ec2-52-91-47-250.compute-1.amazonaws.com/api/clinic-info/';
+        const apiUrl = 'http://ec2-44-204-79-164.compute-1.amazonaws.com/api/clinic-info/';
 
         $.ajax({
             url: apiUrl,
